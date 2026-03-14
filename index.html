@@ -1,116 +1,784 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indian Space Missions</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Indian Space Missions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --saffron: #FF9933;
+      --saffron-glow: rgba(255,153,51,0.35);
+      --saffron-dim: rgba(255,153,51,0.12);
+      --white: #F0F4FF;
+      --muted: #8A9BBF;
+      --bg-deep: #03060F;
+      --bg-card: rgba(8,16,38,0.75);
+      --border: rgba(255,153,51,0.18);
+      --blue-accent: #3B8BFF;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--white);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 400;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── STARFIELD ── */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 64px;
+      background: rgba(3,6,15,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--saffron);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 18px var(--saffron-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s, text-shadow 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--saffron);
+      text-shadow: 0 0 12px var(--saffron-glow);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      overflow: hidden;
+    }
+
+    .hero-planet {
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #1a3a6e, #040d24 60%, #020608);
+      box-shadow:
+        0 0 60px rgba(59,139,255,0.2),
+        inset 0 0 40px rgba(59,139,255,0.1);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .hero-ring {
+      position: absolute;
+      bottom: -112px;
+      right: -160px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      border: 1px solid rgba(59,139,255,0.15);
+      pointer-events: none;
+    }
+
+    .hero-ring2 {
+      position: absolute;
+      bottom: -160px;
+      right: -208px;
+      width: 620px;
+      height: 620px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,153,51,0.07);
+      pointer-events: none;
+    }
+
+    .isro-logo {
+      width: 72px;
+      height: 72px;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 16px var(--saffron-glow));
+      border-radius: 50%;
+      background: rgba(255,153,51,0.08);
+      padding: 8px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-bottom: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      background: linear-gradient(135deg, #FFFFFF 30%, var(--saffron) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.25rem;
+      max-width: 720px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 2.2rem;
+      background: transparent;
+      border: 1px solid var(--saffron);
+      border-radius: 4px;
+      color: var(--saffron);
+      font-family: 'Orbitron', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, box-shadow 0.25s, color 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--saffron);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+
+    .hero-cta:hover::before { transform: translateX(0); }
+    .hero-cta:hover { color: #03060F; box-shadow: 0 0 30px var(--saffron-glow); }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3.5rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--saffron);
+      text-shadow: 0 0 20px var(--saffron-glow);
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-bottom: 0.75rem;
+      opacity: 0.85;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 3rem;
+    }
+
+    /* ── MISSION CARDS ── */
+    .missions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .mission-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(12px);
+    }
+
+    .mission-card:hover {
+      border-color: var(--saffron);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(255,153,51,0.15), 0 0 0 1px rgba(255,153,51,0.1);
+    }
+
+    .mission-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.7) saturate(0.85);
+      transition: filter 0.3s;
+    }
+
+    .mission-card:hover .mission-card-img {
+      filter: brightness(0.85) saturate(1.1);
+    }
+
+    .mission-card-body {
+      padding: 1.25rem 1.4rem 1.5rem;
+    }
+
+    .mission-card-tag {
+      display: inline-block;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      background: var(--saffron-dim);
+      border: 1px solid rgba(255,153,51,0.25);
+      border-radius: 3px;
+      padding: 3px 8px;
+      margin-bottom: 0.75rem;
+    }
+
+    .mission-card-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+
+    .mission-card-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .mission-card-arrow {
+      position: absolute;
+      bottom: 1.25rem;
+      right: 1.4rem;
+      color: var(--saffron);
+      font-size: 1.1rem;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .mission-card:hover .mission-card-arrow {
+      opacity: 1;
+      transform: translate(4px, -4px);
+    }
+
+    /* ── ABOUT ISRO STRIP ── */
+    .about-strip {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, rgba(255,153,51,0.06) 0%, rgba(3,6,15,0) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 4.5rem 2rem;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    .achievements {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .achievement-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.25s;
+    }
+
+    .achievement-item:hover { border-color: rgba(255,153,51,0.4); }
+
+    .achievement-year {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--saffron);
+      min-width: 42px;
+      margin-top: 2px;
+    }
+
+    .achievement-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── MORE LINKS ── */
+    .explore-grid {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .explore-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      backdrop-filter: blur(8px);
+    }
+
+    .explore-card:hover {
+      border-color: var(--saffron);
+      box-shadow: 0 4px 24px rgba(255,153,51,0.1);
+    }
+
+    .explore-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .explore-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+
+    .explore-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: 'Orbitron', monospace;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── SCAN LINE EFFECT ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.6rem; }
+      .hero-stats { gap: 1.8rem; }
+      .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-planet { width: 260px; height: 260px; bottom: -50px; right: -50px; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Indian Space Missions</h1>
-        <nav>
-            <a href="index.html" class="active">Home</a>
-            <a href="missions.html">Missions</a>
-            <a href="timeline.html">Timeline</a>
-            <a href="scientists.html">Scientists</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="about.html">About</a>
-        </nav>
-    </header>
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Exploring Space, Inspiring a Nation</h2>
-                <p>
-                    Discover India’s journey from its first satellite launch to interplanetary missions. Learn about Chandrayaan, Mangalyaan, Aditya-L1, Gaganyaan, and the brilliant scientists behind them.
-                </p>
-                <a href="missions.html" class="hero-button">Explore All Missions</a>
-            </div>
-            <img src="/images/isrologo.png" alt="ISRO Logo" class="hero-logo" />
-        </section>
-        
-        <!-- Quick Mission Highlights -->
-        <section>
-            <h2>Mission Highlights</h2>
-            <div class="highlight-cards">
-                <a href="chandrayaan3.html" class="highlight-card">
-                    <img src="/images/c3/vikramlander.jpg" alt="Chandrayaan-3" />
-                    <div>
-                        <h3>Chandrayaan-3</h3>
-                        <p>First successful lunar south pole landing (2023)</p>
-                    </div>
-                </a>
-                <a href="mangalyaan.html" class="highlight-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Mangalyaan-Mars-Orbiter-Mission-India-ISRO-Spacecraft.jpg" alt="Mangalyaan" />
-                    <div>
-                        <h3>Mangalyaan</h3>
-                        <p>First Asian Mars mission (2013)</p>
-                    </div>
-                </a>
-                <a href="aditya-l1.html" class="highlight-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Aditya_L1_Spacecraft.jpg" alt="Aditya-L1" />
-                    <div>
-                        <h3>Aditya-L1</h3>
-                        <p>India’s first solar mission (2023)</p>
-                    </div>
-                </a>
-                <a href="gaganyaan.html" class="highlight-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/ISRO_Gaganyaan_Spacecraft_Model_Aero_India_2019.jpg/400px-ISRO_Gaganyaan_Spacecraft_Model_Aero_India_2019.jpg" alt="Gaganyaan" />
-                    <div>
-                        <h3>Gaganyaan</h3>
-                        <p>India’s first crewed spaceflight (Upcoming)</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- About ISRO Section -->
-        <section>
-            <h2>What is ISRO?</h2>
-            <p>
-                The Indian Space Research Organisation (ISRO) is India’s national space agency, renowned for its innovative, cost-effective missions and rapid advancements in satellite and launch vehicle technology. Established in 1969, ISRO has launched satellites for communication, earth observation, navigation, and planetary exploration, making India a key player in the global space community.
-            </p>
-        </section>
-        
-        <!-- Recent Achievements -->
-        <section>
-            <h2>Recent Achievements</h2>
-            <ul class="achievements-list">
-                <li>
-                    <strong>2023:</strong> Chandrayaan-3 lands near lunar south pole, a world first.
-                </li>
-                <li>
-                    <strong>2023:</strong> Aditya-L1 solar mission launched, India's first Sun observatory.
-                </li>
-                <li>
-                    <strong>2022:</strong> ISRO launches record number of satellites with PSLV.
-                </li>
-                <li>
-                    <strong>2019:</strong> Chandrayaan-2 orbiter continues to send valuable lunar data.
-                </li>
-            </ul>
-        </section>
-        
-        <!-- Navigation Shortcuts -->
-        <section class="shortcuts">
-            <a href="timeline.html" class="shortcut-card">
-                <h3>Interactive Timeline</h3>
-                <p>See all Indian space missions at a glance</p>
-            </a>
-            <a href="scientists.html" class="shortcut-card">
-                <h3>Meet the Scientists</h3>
-                <p>Learn about the visionaries behind ISRO’s success</p>
-            </a>
-            <a href="gallery.html" class="shortcut-card">
-                <h3>Gallery</h3>
-                <p>View mission photos, spacecraft, and launches</p>
-            </a>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Indian Space Missions. Not affiliated with ISRO.</p>
-    </footer>
+
+  <!-- STARFIELD CANVAS -->
+  <canvas id="starfield"></canvas>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">&#9654; ISRO Missions</a>
+    <ul class="nav-links">
+      <li><a href="missions.html">Missions</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="scientists.html">Scientists</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-planet"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring2"></div>
+
+    <img src="images/isrologo.png" alt="ISRO Logo" class="isro-logo" onerror="this.style.display='none'"/>
+
+    <p class="hero-eyebrow">Indian Space Research Organisation</p>
+    <h1 class="hero-title">Exploring Space,<br/>Inspiring a Nation</h1>
+    <p class="hero-subtitle">
+      Discover India's journey from its first satellite launch to interplanetary missions.
+      Chandrayaan. Mangalyaan. Aditya-L1. Gaganyaan.
+    </p>
+    <a href="missions.html" class="hero-cta">
+      <span>&#11088;</span> Explore All Missions
+    </a>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">1969</div>
+        <div class="stat-label">Founded</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Missions</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1st</div>
+        <div class="stat-label">Lunar South Pole</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4th</div>
+        <div class="stat-label">Space Agency</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION HIGHLIGHTS -->
+  <div class="section">
+    <p class="section-label">&#9679; Mission Highlights</p>
+    <h2 class="section-title">India's Greatest Space Achievements</h2>
+
+    <div class="missions-grid">
+
+      <a href="chandrayaan3.html" class="mission-card">
+        <img src="images/c3/vikramlander.jpg" alt="Chandrayaan-3" class="mission-card-img"
+             onerror="this.style.background='linear-gradient(135deg,#0d1b3e,#1a3a6e)';this.removeAttribute('src')"/>
+        <div class="mission-card-body">
+          <span class="mission-card-tag">Lunar · 2023</span>
+          <h3 class="mission-card-title">Chandrayaan-3</h3>
+          <p class="mission-card-desc">First successful lunar south pole landing — a world first that made India the 4th nation to land on the Moon.</p>
+        </div>
+        <span class="mission-card-arrow">&#8599;</span>
+      </a>
+
+      <a href="mangalyaan.html" class="mission-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Mangalyaan-Mars-Orbiter-Mission-India-ISRO-Spacecraft.jpg"
+             alt="Mangalyaan" class="mission-card-img"
+             onerror="this.style.background='linear-gradient(135deg,#3d0d0d,#6e1a1a)';this.removeAttribute('src')"/>
+        <div class="mission-card-body">
+          <span class="mission-card-tag">Mars · 2013</span>
+          <h3 class="mission-card-title">Mangalyaan</h3>
+          <p class="mission-card-desc">First Asian Mars mission — and achieved on the very first attempt at a fraction of Hollywood's budget.</p>
+        </div>
+        <span class="mission-card-arrow">&#8599;</span>
+      </a>
+
+      <a href="aditya-l1.html" class="mission-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Aditya_L1_Spacecraft.jpg"
+             alt="Aditya-L1" class="mission-card-img"
+             onerror="this.style.background='linear-gradient(135deg,#2d1a00,#6e4400)';this.removeAttribute('src')"/>
+        <div class="mission-card-body">
+          <span class="mission-card-tag">Solar · 2023</span>
+          <h3 class="mission-card-title">Aditya-L1</h3>
+          <p class="mission-card-desc">India's first solar observatory, parked at the L1 Lagrange point to study the Sun continuously.</p>
+        </div>
+        <span class="mission-card-arrow">&#8599;</span>
+      </a>
+
+      <a href="gaganyaan.html" class="mission-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/ISRO_Gaganyaan_Spacecraft_Model_Aero_India_2019.jpg/400px-ISRO_Gaganyaan_Spacecraft_Model_Aero_India_2019.jpg"
+             alt="Gaganyaan" class="mission-card-img"
+             onerror="this.style.background='linear-gradient(135deg,#0a1a0a,#1a3d1a)';this.removeAttribute('src')"/>
+        <div class="mission-card-body">
+          <span class="mission-card-tag">Crewed · Upcoming</span>
+          <h3 class="mission-card-title">Gaganyaan</h3>
+          <p class="mission-card-desc">India's first crewed spaceflight mission — set to carry Indian astronauts to low Earth orbit.</p>
+        </div>
+        <span class="mission-card-arrow">&#8599;</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip">
+    <div class="about-inner">
+      <div class="about-text">
+        <p class="section-label" style="margin-bottom:0.75rem;">&#9679; What is ISRO?</p>
+        <h2 class="section-title" style="margin-bottom:1.5rem;">India's Gateway<br/>to the Cosmos</h2>
+        <p>
+          The Indian Space Research Organisation (ISRO) is India's national space agency, established in 1969.
+          Renowned for its cost-effective missions and rapid advancements in satellite and launch vehicle technology,
+          ISRO has placed India among the top spacefaring nations on Earth — reaching Mars, the Moon, and the Sun
+          with missions that redefine what's possible on a modest budget.
+        </p>
+      </div>
+
+      <ul class="achievements">
+        <li class="achievement-item">
+          <span class="achievement-year">2023</span>
+          <span class="achievement-desc">Chandrayaan-3 lands near lunar south pole — a world first. India becomes 4th nation on the Moon.</span>
+        </li>
+        <li class="achievement-item">
+          <span class="achievement-year">2023</span>
+          <span class="achievement-desc">Aditya-L1 launched — India's first Sun observatory stationed at the L1 Lagrange point.</span>
+        </li>
+        <li class="achievement-item">
+          <span class="achievement-year">2022</span>
+          <span class="achievement-desc">ISRO launches a record number of satellites in a single PSLV mission.</span>
+        </li>
+        <li class="achievement-item">
+          <span class="achievement-year">2019</span>
+          <span class="achievement-desc">Chandrayaan-2 orbiter continues to transmit valuable lunar data from orbit.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EXPLORE MORE -->
+  <div class="section" style="padding-bottom:0;">
+    <p class="section-label">&#9679; Explore More</p>
+    <h2 class="section-title">Go Deeper</h2>
+  </div>
+
+  <div class="explore-grid">
+    <a href="timeline.html" class="explore-card">
+      <span class="explore-icon">&#128336;</span>
+      <div>
+        <div class="explore-label">Interactive Timeline</div>
+        <div class="explore-sub">All missions at a glance</div>
+      </div>
+    </a>
+    <a href="scientists.html" class="explore-card">
+      <span class="explore-icon">&#128100;</span>
+      <div>
+        <div class="explore-label">Meet the Scientists</div>
+        <div class="explore-sub">Visionaries behind ISRO</div>
+      </div>
+    </a>
+    <a href="gallery.html" class="explore-card">
+      <span class="explore-icon">&#128247;</span>
+      <div>
+        <div class="explore-label">Gallery</div>
+        <div class="explore-sub">Mission photos & launches</div>
+      </div>
+    </a>
+    <a href="missions.html" class="explore-card">
+      <span class="explore-icon">&#128640;</span>
+      <div>
+        <div class="explore-label">All Missions</div>
+        <div class="explore-sub">Complete mission database</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Indian Space Missions &nbsp;·&nbsp; Not affiliated with ISRO
+  </footer>
+
+  <!-- STARFIELD JS -->
+  <script>
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3000);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.4 + 0.2,
+          alpha: Math.random() * 0.7 + 0.2,
+          speed: Math.random() * 0.4 + 0.05,
+          twinkleSpeed: Math.random() * 0.02 + 0.005,
+          twinkleDir: Math.random() > 0.5 ? 1 : -1,
+          color: Math.random() > 0.85
+            ? `rgba(255,200,120,`
+            : Math.random() > 0.7
+              ? `rgba(180,200,255,`
+              : `rgba(255,255,255,`
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const s of stars) {
+        s.alpha += s.twinkleSpeed * s.twinkleDir;
+        if (s.alpha > 0.9 || s.alpha < 0.1) s.twinkleDir *= -1;
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `${s.color}${s.alpha.toFixed(2)})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    resize();
+    initStars();
+    drawStars();
+
+    // Shooting star occasionally
+    function shootingStar() {
+      const x = Math.random() * canvas.width * 0.7;
+      const y = Math.random() * canvas.height * 0.4;
+      const len = Math.random() * 120 + 60;
+      const duration = 600;
+      const start = performance.now();
+
+      function draw(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const alpha = t < 0.5 ? t * 2 : (1 - t) * 2;
+        const ex = x + len * t;
+        const ey = y + len * 0.4 * t;
+
+        ctx.beginPath();
+        ctx.moveTo(x + len * Math.max(0, t - 0.15), y + len * 0.4 * Math.max(0, t - 0.15));
+        ctx.lineTo(ex, ey);
+        const grad = ctx.createLinearGradient(
+          x + len * Math.max(0, t - 0.15), y + len * 0.4 * Math.max(0, t - 0.15),
+          ex, ey
+        );
+        grad.addColorStop(0, `rgba(255,255,255,0)`);
+        grad.addColorStop(1, `rgba(255,220,150,${alpha})`);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        if (t < 1) requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+      setTimeout(shootingStar, Math.random() * 5000 + 3000);
+    }
+    setTimeout(shootingStar, 2000);
+  </script>
+
 </body>
 </html>
