@@ -103,33 +103,37 @@ nav a.active {
 }
 
 main {
+    position: relative;
+    z-index: 1;
     max-width: 900px;
     margin: 2rem auto;
     padding: 2rem;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(20,40,80,0.06);
+    background: rgba(8,16,38,0.6);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    backdrop-filter: blur(14px);
 }
 
 h2 {
-    color: #f96d00;
+    font-family: 'Orbitron', monospace;
+    color: var(--saffron);
     margin-top: 0;
-}
-
-.center-img {
-    display: block;
-    margin: 2rem auto 1rem auto;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
 }
 
 footer {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    padding: 1rem 0;
-    background: #142850;
-    color: #fff;
-    font-size: 0.95rem;
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 0.06em;
+    background: rgba(3,6,15,0.5);
     margin-top: 2rem;
-    letter-spacing: 0.5px;
-    border-top: 4px solid #f96d00;
 }
 
 /* Mission List */
@@ -619,4 +623,73 @@ img {
 @media (max-width: 900px) {
     .timeline { padding-left: 40px; }
     .timeline-dot { left: -30px; }
+}
+
+
+
+
+/* ══════════════════════════════
+   PAGE-SPECIFIC SPACE BACKGROUNDS
+   ══════════════════════════════ */
+
+/* MISSIONS — Red planet / Mars dust feel */
+body.page-missions::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(180,60,20,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,100,30,0.07) 0%, transparent 60%);
+}
+
+/* TIMELINE — Deep blue galaxy nebula */
+body.page-timeline::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 70% 50% at 15% 30%, rgba(30,80,200,0.13) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 70% at 85% 70%, rgba(100,30,200,0.08) 0%, transparent 60%);
+}
+
+/* SCIENTISTS — Warm golden aurora */
+body.page-scientists::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,153,51,0.1) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 90% 90%, rgba(255,200,80,0.07) 0%, transparent 55%);
+}
+
+/* GALLERY — Cool teal nebula */
+body.page-gallery::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(20,160,160,0.11) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 75% 80%, rgba(30,100,200,0.08) 0%, transparent 55%);
+}
+
+/* TIMELINE — already above */
+
+/* ABOUT — Purple deep space */
+body.page-about::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 70% 50% at 80% 15%, rgba(120,40,200,0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 15% 75%, rgba(60,20,160,0.08) 0%, transparent 60%);
 }
