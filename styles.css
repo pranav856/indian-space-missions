@@ -551,3 +551,22 @@ img {
     border-radius: 0; /* ensures square shape */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* optional styling */
 }
+
+
+
+/* Timeline detail fade transition */
+.timeline-details {
+    transition: opacity 0.15s ease;
+}
+
+/* Year badge in detail panel */
+.year-badge {
+    display: inline-block;
+    background: #f0a500;
+    color: #000;
+    font-size: 0.85rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
