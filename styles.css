@@ -216,74 +216,7 @@ footer {
     color: #f96d00;
 }
 
-/* Timeline (basic, for script.js) */
-.timeline {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin: 2rem 0 1rem 0;
-    padding: 0 1rem;
-    position: relative;
-}
 
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 40px;
-    left: 8%;
-    width: 84%;
-    height: 4px;
-    background: #f96d00;
-    z-index: 1;
-}
-
-.timeline-event {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    cursor: pointer;
-    width: 120px;
-    min-width: 90px;
-    margin: 0 10px;
-}
-
-.timeline-dot {
-    width: 22px;
-    height: 22px;
-    background: #fff;
-    border: 5px solid #f96d00;
-    border-radius: 50%;
-    margin: 0 auto 8px auto;
-    box-shadow: 0 2px 8px rgba(20,40,80,0.10);
-    transition: border 0.3s, box-shadow 0.3s;
-}
-
-.timeline-event.active .timeline-dot,
-.timeline-event:hover .timeline-dot {
-    border: 5px solid #142850;
-    box-shadow: 0 4px 14px rgba(20,40,80,0.18);
-}
-
-.timeline-event span {
-    font-size: 0.92rem;
-    color: #142850;
-    display: block;
-    margin-top: 0.5rem;
-}
-
-.timeline-details {
-    min-height: 100px;
-    background: #f4f7fb;
-    border-radius: 7px;
-    margin: 0 1rem;
-    padding: 1.2rem 1rem 1.2rem 1.2rem;
-    box-shadow: 0 1px 4px rgba(20,40,80,0.05);
-}
-
-.timeline-details h3 {
-    margin-top: 0;
-    color: #f96d00;
-}
 
 @media (max-width: 900px) {
     main {
@@ -292,24 +225,6 @@ footer {
     .scientist-list, .gallery-grid {
         flex-direction: column;
         align-items: center;
-    }
-    .timeline {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-left: 0;
-        padding-right: 0;
-    }
-    .timeline::before {
-        width: 6px;
-        height: 78%;
-        left: 38px;
-        top: 20px;
-    }
-    .timeline-event {
-        flex-direction: row;
-        margin-bottom: 28px;
-        width: auto;
-        min-width: 0;
     }
 }
 
