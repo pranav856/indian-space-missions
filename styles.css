@@ -570,3 +570,40 @@ img {
     margin-left: 8px;
     vertical-align: middle;
 }
+
+
+/* Fix timeline overflow */
+.timeline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;        /* Enable horizontal scroll */
+    scroll-snap-type: x mandatory;
+    padding: 20px 10px 30px;
+    gap: 0;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll on mobile */
+}
+
+.timeline:active {
+    cursor: grabbing;
+}
+
+.timeline-event {
+    scroll-snap-align: center;
+    flex-shrink: 0;          /* Prevent events from squishing */
+    min-width: 110px;
+    text-align: center;
+}
+
+/* Hide scrollbar but keep functionality */
+.timeline::-webkit-scrollbar {
+    height: 6px;
+}
+.timeline::-webkit-scrollbar-thumb {
+    background: #f0a500;
+    border-radius: 10px;
+}
+.timeline::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
