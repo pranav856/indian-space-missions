@@ -1,139 +1,72 @@
-/* ── SPACE THEME BASE (applies to all pages) ── */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600&display=swap');
-
-:root {
-    --saffron: #FF9933;
-    --saffron-glow: rgba(255,153,51,0.35);
-    --saffron-dim: rgba(255,153,51,0.12);
-    --white: #F0F4FF;
-    --muted: #8A9BBF;
-    --bg-deep: #03060F;
-    --bg-card: rgba(8,16,38,0.75);
-    --border: rgba(255,153,51,0.18);
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-
 body {
-    font-family: 'Exo 2', 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: var(--bg-deep);
-    color: var(--white);
-    min-height: 100vh;
-    overflow-x: hidden;
+    background: #f8fafc;
+    color: #142850;
 }
 
-/* Starfield background — shared canvas */
-#starfield {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Scan line overlay — matches homepage */
-body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.03) 2px,
-        rgba(0,0,0,0.03) 4px
-    );
-    pointer-events: none;
-    z-index: 9999;
-}
-
-
-/* ── HEADER / NAV ── */
 header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(3,6,15,0.88);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2.5rem;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    background: #142850;
+    color: #fff;
+    padding: 1rem 0 0.5rem 0;
+    text-align: center;
 }
 
 header h1 {
-    font-family: 'Orbitron', monospace;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--saffron);
-    letter-spacing: 0.08em;
-    text-shadow: 0 0 18px var(--saffron-glow);
     margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
 }
 
 nav {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    margin-top: 0.5rem;
 }
 
 nav a {
-    font-family: 'Orbitron', monospace;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
+    color: #f96d00;
     text-decoration: none;
+    margin: 0 1rem;
+    font-weight: bold;
     border-bottom: 2px solid transparent;
     padding-bottom: 2px;
-    transition: color 0.25s, text-shadow 0.25s, border-color 0.25s;
+    transition: border 0.2s, color 0.2s;
 }
 
-nav a:hover,
-nav a.active {
-    color: var(--saffron);
-    border-bottom-color: var(--saffron);
-    text-shadow: 0 0 12px var(--saffron-glow);
+nav a.active,
+nav a:hover {
+    color: #fff;
+    border-bottom: 2px solid #f96d00;
 }
 
 main {
-    position: relative;
-    z-index: 1;
     max-width: 900px;
     margin: 2rem auto;
     padding: 2rem;
-    background: rgba(8,16,38,0.6);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    backdrop-filter: blur(14px);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(20,40,80,0.06);
 }
 
 h2 {
-    font-family: 'Orbitron', monospace;
-    color: var(--saffron);
+    color: #f96d00;
     margin-top: 0;
-    font-size: 1.3rem;
-    letter-spacing: 0.05em;
+}
+
+.center-img {
+    display: block;
+    margin: 2rem auto 1rem auto;
 }
 
 footer {
-    position: relative;
-    z-index: 1;
     text-align: center;
-    padding: 1.5rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.78rem;
-    color: var(--muted);
-    font-family: 'Orbitron', monospace;
-    letter-spacing: 0.06em;
-    background: rgba(3,6,15,0.5);
+    padding: 1rem 0;
+    background: #142850;
+    color: #fff;
+    font-size: 0.95rem;
     margin-top: 2rem;
+    letter-spacing: 0.5px;
+    border-top: 4px solid #f96d00;
 }
 
 /* Mission List */
@@ -283,6 +216,102 @@ footer {
     color: #f96d00;
 }
 
+/* Timeline (basic, for script.js) */
+.timeline {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 2rem 0 1rem 0;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 8%;
+    width: 84%;
+    height: 4px;
+    background: #f96d00;
+    z-index: 1;
+}
+
+.timeline-event {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    cursor: pointer;
+    width: 120px;
+    min-width: 90px;
+    margin: 0 10px;
+}
+
+.timeline-dot {
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border: 5px solid #f96d00;
+    border-radius: 50%;
+    margin: 0 auto 8px auto;
+    box-shadow: 0 2px 8px rgba(20,40,80,0.10);
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.timeline-event.active .timeline-dot,
+.timeline-event:hover .timeline-dot {
+    border: 5px solid #142850;
+    box-shadow: 0 4px 14px rgba(20,40,80,0.18);
+}
+
+.timeline-event span {
+    font-size: 0.92rem;
+    color: #142850;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.timeline-details {
+    min-height: 100px;
+    background: #f4f7fb;
+    border-radius: 7px;
+    margin: 0 1rem;
+    padding: 1.2rem 1rem 1.2rem 1.2rem;
+    box-shadow: 0 1px 4px rgba(20,40,80,0.05);
+}
+
+.timeline-details h3 {
+    margin-top: 0;
+    color: #f96d00;
+}
+
+@media (max-width: 900px) {
+    main {
+        padding: 1rem;
+    }
+    .scientist-list, .gallery-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .timeline {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .timeline::before {
+        width: 6px;
+        height: 78%;
+        left: 38px;
+        top: 20px;
+    }
+    .timeline-event {
+        flex-direction: row;
+        margin-bottom: 28px;
+        width: auto;
+        min-width: 0;
+    }
+}
 
 @media (max-width: 700px) {
     .scientist-list, .gallery-grid {
@@ -524,7 +553,6 @@ img {
 }
 
 
-
 /* Vertical Timeline */
 .timeline {
     position: relative;
@@ -623,63 +651,4 @@ img {
 @media (max-width: 900px) {
     .timeline { padding-left: 40px; }
     .timeline-dot { left: -30px; }
-}
-
-
-
-
-/* ══════════════════════════════
-   PAGE-SPECIFIC SPACE BACKGROUNDS
-   ══════════════════════════════ */
-
-/* MISSIONS — Red planet / Mars dust feel */
-body.page-missions::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(180,60,20,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,100,30,0.07) 0%, transparent 60%);
-}
-
-/* TIMELINE — Deep blue galaxy nebula */
-body.page-timeline::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse 70% 50% at 15% 30%, rgba(30,80,200,0.13) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 70% at 85% 70%, rgba(100,30,200,0.08) 0%, transparent 60%);
-}
-
-
-
-/* GALLERY — Cool teal nebula */
-body.page-gallery::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(20,160,160,0.11) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 40% at 75% 80%, rgba(30,100,200,0.08) 0%, transparent 55%);
-}
-
-/* TIMELINE — already above */
-
-/* ABOUT — Purple deep space */
-body.page-about::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse 70% 50% at 80% 15%, rgba(120,40,200,0.12) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 60% at 15% 75%, rgba(60,20,160,0.08) 0%, transparent 60%);
 }
