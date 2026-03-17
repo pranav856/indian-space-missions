@@ -5,6 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Missions - Indian Space Missions</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .missions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .mission-card {
+            position: relative;
+            background: #f3f4f7;
+            border: 1px solid #e0e4ef;
+            border-radius: 8px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .mission-card:hover {
+            border-color: #f96d00;
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(249,109,0,0.15);
+        }
+
+        .mission-card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.85) saturate(0.9);
+            transition: filter 0.3s;
+        }
+
+        .mission-card:hover .mission-card-img {
+            filter: brightness(1) saturate(1.1);
+        }
+
+        .mission-card-body {
+            padding: 1.25rem 1.4rem 1.8rem;
+        }
+
+        .mission-card-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #f96d00;
+            background: rgba(249,109,0,0.1);
+            border: 1px solid rgba(249,109,0,0.25);
+            border-radius: 3px;
+            padding: 3px 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .mission-card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #142850;
+        }
+
+        .mission-card-desc {
+            font-size: 0.85rem;
+            color: #5a6a8a;
+            line-height: 1.65;
+        }
+
+        .mission-card-arrow {
+            position: absolute;
+            bottom: 1.25rem;
+            right: 1.4rem;
+            color: #f96d00;
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .mission-card:hover .mission-card-arrow {
+            opacity: 1;
+            transform: translate(4px, -4px);
+        }
+
+        .section-divider {
+            margin: 2.5rem 0 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #f96d00;
+            border-bottom: 2px solid rgba(249,109,0,0.15);
+            padding-bottom: 0.5rem;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,22 +115,321 @@
         </nav>
     </header>
     <main>
-        <section>
-            <h2>Major Indian Space Missions</h2>
-            <ul>
-  <li><a href="chandrayaan1.html">Chandrayaan-1 (2008)</a></li>
-  <li><a href="chandrayaan2.html">Chandrayaan-2 (2019)</a></li>
-  <li><a href="chandrayaan3.html">Chandrayaan-3 (2023)</a></li>
-  <li><a href="mangalyaan.html">Mangalyaan (Mars Orbiter, 2013)</a></li>
-  <li><a href="aditya-l1.html">Aditya-L1 (2023)</a></li>
-  <li><a href="gaganyaan.html">Gaganyaan (Crewed, upcoming)</a></li>
-  <li><a href="astrosat.html">Astrosat (2015)</a></li>
-  <li><a href="indianspacestation.html">India's Own Space Station (Planned)</a></li>
-</ul>
-            <p>
-                Click on a mission to learn more.
-            </p>
-        </section>
+        <h2>All Missions</h2>
+        <p style="color:#5a6a8a;margin-bottom:0.5rem;">India's complete space mission archive — from the first satellite to interplanetary exploration.</p>
+
+        <!-- LUNAR -->
+        <p class="section-divider">&#9679; Lunar Missions</p>
+        <div class="missions-grid">
+
+            <a href="chandrayaan1.html" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Chandrayaan-1.jpg"
+                     alt="Chandrayaan-1" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d1b3e,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Lunar · 2008</span>
+                    <h3 class="mission-card-title">Chandrayaan-1</h3>
+                    <p class="mission-card-desc">India's first lunar probe. Discovered water ice molecules on the Moon's surface using NASA's Moon Mineralogy Mapper.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="chandrayaan2.html" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Chandrayaan-2_orbiter.jpg"
+                     alt="Chandrayaan-2" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d1b3e,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Lunar · 2019</span>
+                    <h3 class="mission-card-title">Chandrayaan-2</h3>
+                    <p class="mission-card-desc">Orbiter continues to send valuable lunar data. Lander attempted the first-ever south pole landing — the orbiter remains fully operational.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="chandrayaan3.html" class="mission-card">
+                <img src="images/c3/vikramlander.jpg"
+                     alt="Chandrayaan-3" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d1b3e,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Lunar · 2023</span>
+                    <h3 class="mission-card-title">Chandrayaan-3</h3>
+                    <p class="mission-card-desc">First successful lunar south pole landing — a world first that made India the 4th nation to land on the Moon.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/JAXA_LUPEX_lunar_rover.jpg/440px-JAXA_LUPEX_lunar_rover.jpg"
+                     alt="LUPEX" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d1b3e,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Lunar · Planned</span>
+                    <h3 class="mission-card-title">LUPEX</h3>
+                    <p class="mission-card-desc">Lunar Polar Exploration mission — a joint ISRO-JAXA rover mission to study water ice at the Moon's south pole in the 2020s.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+        </div>
+
+        <!-- PLANETARY -->
+        <p class="section-divider">&#9679; Planetary Missions</p>
+        <div class="missions-grid">
+
+            <a href="Mangalyann.html" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Mangalyaan-Mars-Orbiter-Mission-India-ISRO-Spacecraft.jpg"
+                     alt="Mangalyaan" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#3d0d0d,#6e1a1a)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Mars · 2013</span>
+                    <h3 class="mission-card-title">Mangalyaan (MOM)</h3>
+                    <p class="mission-card-desc">First Asian Mars mission — achieved on the very first attempt at a fraction of Hollywood's budget. Operated for over 7 years.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Venus_-_December_23_2016.png/440px-Venus_-_December_23_2016.png"
+                     alt="Shukrayaan-1" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#2d1a00,#6e4400)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Venus · Planned 2028</span>
+                    <h3 class="mission-card-title">Shukrayaan-1</h3>
+                    <p class="mission-card-desc">India's first Venus orbiter — will study Venus's thick atmosphere, volcanic activity, and surface using a synthetic aperture radar.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+        </div>
+
+        <!-- SOLAR -->
+        <p class="section-divider">&#9679; Solar Missions</p>
+        <div class="missions-grid">
+
+            <a href="adityal1.html" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Aditya_L1_Spacecraft.jpg"
+                     alt="Aditya-L1" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#2d1a00,#6e4400)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Solar · 2023</span>
+                    <h3 class="mission-card-title">Aditya-L1</h3>
+                    <p class="mission-card-desc">India's first solar observatory parked at the L1 Lagrange point, 1.5 million km from Earth, studying the Sun continuously.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+        </div>
+
+        <!-- CREWED -->
+        <p class="section-divider">&#9679; Crewed Missions</p>
+        <div class="missions-grid">
+
+            <a href="gaganyaan.html" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/ISRO_Gaganyaan_Spacecraft_Model_Aero_India_2019.jpg/400px-ISRO_Gaganyaan_Spacecraft_Model_Aero_India_2019.jpg"
+                     alt="Gaganyaan" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0a1a0a,#1a3d1a)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Crewed · Upcoming</span>
+                    <h3 class="mission-card-title">Gaganyaan</h3>
+                    <p class="mission-card-desc">India's first crewed spaceflight — a 3-member crew to Low Earth Orbit for 3 days. Will make India the 4th nation to launch humans independently.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="indianspacestation.html" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/International_Space_Station_after_undocking_of_STS-132.jpg/440px-International_Space_Station_after_undocking_of_STS-132.jpg"
+                     alt="Indian Space Station" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#1a0d2e,#3d1a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Station · Planned 2035</span>
+                    <h3 class="mission-card-title">Indian Space Station</h3>
+                    <p class="mission-card-desc">India's planned orbital space station — establishing a permanent human presence in space by 2035, building on Gaganyaan technology.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+        </div>
+
+        <!-- ASTRONOMY -->
+        <p class="section-divider">&#9679; Astronomy & Science</p>
+        <div class="missions-grid">
+
+            <a href="astrosat.html" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/AstroSat_India.jpg/400px-AstroSat_India.jpg"
+                     alt="AstroSat" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d0d2e,#1a1a5e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Astronomy · 2015</span>
+                    <h3 class="mission-card-title">AstroSat</h3>
+                    <p class="mission-card-desc">India's first dedicated multi-wavelength space observatory — studying black holes and neutron stars in UV, optical, and X-ray wavelengths simultaneously.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/SPADEX_Mission_Logo.png/440px-SPADEX_Mission_Logo.png"
+                     alt="SPADEX" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d1b3e,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Technology · 2024</span>
+                    <h3 class="mission-card-title">SPADEX</h3>
+                    <p class="mission-card-desc">Space Docking Experiment — made India the 4th country to master orbital docking, a critical technology for future crewed and space station missions.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/RLV-TD_HEX01_after_landing.jpg/440px-RLV-TD_HEX01_after_landing.jpg"
+                     alt="RLV-TD" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d1b3e,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Technology · 2016</span>
+                    <h3 class="mission-card-title">RLV-TD</h3>
+                    <p class="mission-card-desc">Reusable Launch Vehicle Technology Demonstrator — India's Space Shuttle prototype that demonstrated hypersonic flight and autonomous landing.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+        </div>
+
+        <!-- LAUNCH VEHICLES -->
+        <p class="section-divider">&#9679; Launch Vehicles & Records</p>
+        <div class="missions-grid">
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/PSLV-C37_lifts_off.jpg/440px-PSLV-C37_lifts_off.jpg"
+                     alt="PSLV-C37" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#142850,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Record · 2017</span>
+                    <h3 class="mission-card-title">PSLV-C37</h3>
+                    <p class="mission-card-desc">World record — 104 satellites launched in a single mission on February 15, 2017, surpassing Russia's previous record of 37.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/GSLV_Mk_III_D1_launching.jpg/440px-GSLV_Mk_III_D1_launching.jpg"
+                     alt="GSLV Mk III" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#142850,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Launch Vehicle · 2017</span>
+                    <h3 class="mission-card-title">GSLV Mk III</h3>
+                    <p class="mission-card-desc">India's most powerful rocket — capable of carrying 4 tonnes to GTO and 10 tonnes to LEO. Will carry the Gaganyaan crew to orbit.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+        </div>
+
+        <!-- SATELLITES -->
+        <p class="section-divider">&#9679; Satellites</p>
+        <div class="missions-grid">
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GSAT-11.jpg/440px-GSAT-11.jpg"
+                     alt="GSAT-11" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d1b3e,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Communication · 2018</span>
+                    <h3 class="mission-card-title">GSAT-11</h3>
+                    <p class="mission-card-desc">India's heaviest satellite at 5,854 kg — provides over 16 Gbps broadband connectivity across India, boosting rural internet access significantly.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/IRNSS-1A_Spacecraft.jpg/440px-IRNSS-1A_Spacecraft.jpg"
+                     alt="NavIC" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d2e1b,#1a6e3a)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Navigation · 2018</span>
+                    <h3 class="mission-card-title">NavIC</h3>
+                    <p class="mission-card-desc">India's own GPS — Navigation with Indian Constellation. 7 satellites providing accurate positioning over India and 1,500 km beyond its borders.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Cartosat-2_series_satellite.jpg/440px-Cartosat-2_series_satellite.jpg"
+                     alt="Cartosat" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d2e1b,#1a6e3a)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Earth Observation · 2007–2019</span>
+                    <h3 class="mission-card-title">Cartosat Series</h3>
+                    <p class="mission-card-desc">A series of high-resolution Earth imaging satellites used for cartography, urban planning, disaster management, and border surveillance.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/RISAT-1_Spacecraft.jpg/440px-RISAT-1_Spacecraft.jpg"
+                     alt="RISAT" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d2e1b,#1a6e3a)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Earth Observation · 2012–2022</span>
+                    <h3 class="mission-card-title">RISAT Series</h3>
+                    <p class="mission-card-desc">Radar Imaging Satellite series capable of imaging Earth through clouds and at night — critical for disaster monitoring, agriculture, and defence.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Resourcesat-2A.jpg/440px-Resourcesat-2A.jpg"
+                     alt="Resourcesat" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#0d2e1b,#1a6e3a)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Earth Observation · 2003–2016</span>
+                    <h3 class="mission-card-title">Resourcesat Series</h3>
+                    <p class="mission-card-desc">Multi-spectral Earth observation satellites monitoring land use, crop health, water bodies, and natural resources across India and globally.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/INSAT-3DR_Spacecraft.jpg/440px-INSAT-3DR_Spacecraft.jpg"
+                     alt="INSAT" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#142850,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Communication · 1983–Present</span>
+                    <h3 class="mission-card-title">INSAT Series</h3>
+                    <p class="mission-card-desc">Indian National Satellite System — one of the largest domestic communication satellite systems in Asia, supporting TV broadcasting, weather forecasting, and disaster warnings.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+        </div>
+
+        <!-- EARLY MISSIONS -->
+        <p class="section-divider">&#9679; Pioneer Missions</p>
+        <div class="missions-grid">
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Aryabhata_satellite.jpg/440px-Aryabhata_satellite.jpg"
+                     alt="Aryabhata" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#142850,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Pioneer · 1975</span>
+                    <h3 class="mission-card-title">Aryabhata</h3>
+                    <p class="mission-card-desc">India's very first satellite — launched April 19, 1975 on a Soviet rocket. Named after the ancient Indian mathematician. It began India's journey into space.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+            <a href="#" class="mission-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/SLV_launch.jpg/440px-SLV_launch.jpg"
+                     alt="SLV-3" class="mission-card-img"
+                     onerror="this.style.background='linear-gradient(135deg,#142850,#1a3a6e)';this.removeAttribute('src')"/>
+                <div class="mission-card-body">
+                    <span class="mission-card-tag">Pioneer · 1980</span>
+                    <h3 class="mission-card-title">SLV-3</h3>
+                    <p class="mission-card-desc">India's first indigenous rocket — developed under Dr. A.P.J. Abdul Kalam. Successfully placed the Rohini satellite into orbit in 1980, making India the 7th spacefaring nation.</p>
+                </div>
+                <span class="mission-card-arrow">&#8599;</span>
+            </a>
+
+        </div>
+
     </main>
     <footer>
         <p>&copy; 2025 Indian Space Missions. Not affiliated with ISRO.</p>
